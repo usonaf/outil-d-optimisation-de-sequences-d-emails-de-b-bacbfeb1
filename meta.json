@@ -1,0 +1,46 @@
+{
+  "name": "Outil d'Optimisation de Séquences d'Emails de Bienvenue",
+  "description": "Analysez et optimisez vos séquences d",
+  "theme": "tool",
+  "design_theme": "liquid-glass",
+  "structure_preset": "bento-signal",
+  "render_direction": "campaign-slab",
+  "page_blueprint": "magazine-fold",
+  "language": "fr",
+  "country": "FR",
+  "url": null,
+  "expected_url": "https://outil-d-optimisation-de-sequences-d-emails-de-b-bacbfeb1.onrender.com",
+  "created": "2026-05-24T22:04:50.673423+00:00",
+  "owner_user_id": "user-1774822953462",
+  "owner_username": "admin",
+  "owner_display_name": "Administrator",
+  "provider_space_id": "provider-space",
+  "provider_space_name": "Provider space",
+  "status": "generated",
+  "run_id": "run-1779659877022",
+  "external_site_request_id": null,
+  "external_client_ref": null,
+  "external_source_label": null,
+  "source_type": "generated",
+  "publish_target": "render",
+  "mode": "production",
+  "github": {
+    "status": "pending"
+  },
+  "deployment": {
+    "status": "pending"
+  },
+  "qa": {
+    "status": "pending"
+  },
+  "features": [
+    "Hero pattern: command",
+    "Proof module: badges",
+    "Design theme: Liquid Glass",
+    "Render direction: Campaign Slab",
+    "Page blueprint: Magazine Fold",
+    "Runtime mode: profile_generator",
+    "Generation mode: direct_html",
+    "Artifact rendered, awaiting QA and deployment"
+  ]
+}
