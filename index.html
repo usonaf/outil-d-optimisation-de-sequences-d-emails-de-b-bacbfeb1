@@ -1,0 +1,745 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Outil d&#x27;Optimisation de Séquences d&#x27;Emails de Bienvenue | Analysez vos Séquences pour un Impact Maximum</title>
+    <meta name="description" content="Analysez et optimisez vos séquences d">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Merriweather:wght@700&family=Roboto:wght@400;700&display=swap');
+        :root {
+            --color-primary: #0056b3;
+            --color-secondary: #007bff;
+            --color-background: #f8f9fa;
+            --color-text: #343a40;
+            --color-light-glass: rgba(255, 255, 255, 0.7);
+            --color-dark-glass: rgba(0, 0, 0, 0.05);
+            --border-radius: 8px;
+            --spacing-unit: 1rem;
+        }
+        body {
+            font-family: 'Roboto', sans-serif;
+            line-height: 1.6;
+            color: var(--color-text);
+            background-color: var(--color-background);
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        header {
+            background-color: var(--color-primary);
+            color: white;
+            padding: calc(2 * var(--spacing-unit)) 0;
+            text-align: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        header h1 {
+            font-family: 'Merriweather', serif;
+            font-size: 2.8rem;
+            margin-bottom: 0.5rem;
+        }
+        header p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 var(--spacing-unit);
+        }
+        .container {
+            max-width: 1100px;
+            margin: calc(3 * var(--spacing-unit)) auto;
+            padding: 0 calc(1.5 * var(--spacing-unit));
+            flex-grow: 1;
+        }
+        .section {
+            background-color: var(--color-light-glass);
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: var(--border-radius);
+            padding: calc(2 * var(--spacing-unit));
+            margin-bottom: calc(2 * var(--spacing-unit));
+            box-shadow: 0 2px 10px var(--color-dark-glass);
+            transition: transform 0.3s ease-in-out;
+        }
+        .section:hover {
+            transform: translateY(-3px);
+        }
+        h2 {
+            font-family: 'Merriweather', serif;
+            color: var(--color-primary);
+            font-size: 2.2rem;
+            margin-bottom: calc(1.5 * var(--spacing-unit));
+            text-align: center;
+        }
+        h3 {
+            font-family: 'Merriweather', serif;
+            color: var(--color-secondary);
+            font-size: 1.5rem;
+            margin-top: calc(2 * var(--spacing-unit));
+            margin-bottom: var(--spacing-unit);
+        }
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: bold;
+            color: var(--color-text);
+        }
+        textarea, select, input[type="text"] {
+            width: 100%;
+            padding: var(--spacing-unit);
+            margin-bottom: calc(1.5 * var(--spacing-unit));
+            border: 1px solid #ced4da;
+            border-radius: var(--border-radius);
+            box-sizing: border-box;
+            background-color: white;
+            font-family: 'Roboto', sans-serif;
+            font-size: 1rem;
+            resize: vertical;
+        }
+        button {
+            background-color: var(--color-secondary);
+            color: white;
+            padding: var(--spacing-unit) calc(2 * var(--spacing-unit));
+            border: none;
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            font-size: 1.1rem;
+            font-weight: bold;
+            transition: background-color 0.3s ease;
+            display: block;
+            width: auto;
+            margin: 0 auto;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .result-panel {
+            background-color: var(--color-background);
+            border: 1px dashed var(--color-secondary);
+            border-radius: var(--border-radius);
+            padding: calc(1.5 * var(--spacing-unit));
+            margin-top: calc(2 * var(--spacing-unit));
+            font-size: 1rem;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            min-height: 100px;
+        }
+        .cta-button {
+            display: inline-block;
+            background-color: var(--color-primary);
+            color: white;
+            padding: 0.8rem 1.8rem;
+            border-radius: var(--border-radius);
+            text-decoration: none;
+            font-weight: bold;
+            transition: background-color 0.3s ease;
+            margin-top: calc(1.5 * var(--spacing-unit));
+        }
+        .cta-button:hover {
+            background-color: #004085;
+        }
+        .testimonial-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: calc(1.5 * var(--spacing-unit));
+            margin-top: calc(2 * var(--spacing-unit));
+        }
+        .testimonial-card {
+            background-color: var(--color-light-glass);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: var(--border-radius);
+            padding: calc(1.5 * var(--spacing-unit));
+            box-shadow: 0 1px 5px var(--color-dark-glass);
+        }
+        .testimonial-card p {
+            font-style: italic;
+            margin-bottom: 0.8rem;
+        }
+        .testimonial-card strong {
+            display: block;
+            text-align: right;
+            color: var(--color-primary);
+        }
+        .seo-section {
+            background-color: #e9ecef;
+            padding: calc(3 * var(--spacing-unit)) 0;
+            text-align: center;
+            margin-top: calc(4 * var(--spacing-unit));
+            color: #495057;
+        }
+        .seo-section .container {
+            padding: 0 calc(1.5 * var(--spacing-unit));
+        }
+        .seo-section h2 {
+            color: #212529;
+            margin-bottom: calc(1.5 * var(--spacing-unit));
+        }
+        .seo-section p {
+            max-width: 900px;
+            margin: 0 auto 1rem auto;
+            line-height: 1.8;
+            text-align: left;
+        }
+        .seo-section ul {
+            list-style: none;
+            padding: 0;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 0.5rem 1rem;
+            margin-top: calc(1.5 * var(--spacing-unit));
+        }
+        .seo-section li {
+            background-color: rgba(255, 255, 255, 0.5);
+            padding: 0.4rem 0.8rem;
+            border-radius: 5px;
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            font-size: 0.9rem;
+        }
+        footer {
+            background-color: var(--color-primary);
+            color: white;
+            text-align: center;
+            padding: var(--spacing-unit) 0;
+            margin-top: auto;
+        }
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 2rem;
+            }
+            header p {
+                font-size: 1rem;
+            }
+            h2 {
+                font-size: 1.8rem;
+            }
+            h3 {
+                font-size: 1.3rem;
+            }
+            .section {
+                padding: var(--spacing-unit);
+            }
+            .testimonial-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://outil-d-optimisation-de-sequences-d-emails-de-b-bacbfeb1.onrender.com">
+    <meta property="og:title" content="Outil d&#x27;Optimisation de Séquences d&#x27;Emails de Bienvenue">
+    <meta property="og:description" content="Analysez et optimisez vos séquences d">
+    <meta property="og:url" content="https://outil-d-optimisation-de-sequences-d-emails-de-b-bacbfeb1.onrender.com">
+    <meta property="og:type" content="website">
+    <script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebApplication", "name": "Outil d'Optimisation de Séquences d'Emails de Bienvenue", "description": "Analysez et optimisez vos séquences d", "url": "https://outil-d-optimisation-de-sequences-d-emails-de-b-bacbfeb1.onrender.com", "applicationCategory": "UtilityApplication", "operatingSystem": "Web Browser"}</script>
+</head>
+<body data-site-slug="outil-d-optimisation-de-sequences-d-emails-de-b-bacbfeb1" data-runtime-mode="profile_generator">
+    <header>
+        <h1>Découvrez l'Optimisateur de Séquences d'Emails de Bienvenue</h1>
+        <p>Transformez vos nouveaux inscrits en clients fidèles dès le premier contact. Notre outil analyse et suggère des améliorations data-driven pour vos emails de bienvenue, boostant engagement et conversion.</p>
+    </header>
+
+    <main class="container">
+        <section class="section">
+            <h2>Analysez vos Séquences pour un Impact Maximum</h2>
+            <p>Le premier email est crucial. Utilisez notre moteur d'analyse pour révéler les opportunités cachées dans vos communications d'accueil. Nous mettons en lumière les points clés pour optimiser l'engagement, la personnalisation, les appels à l'action et le contenu éducatif.</p>
+
+            <form id="tool-form">
+                <label for="email-series-content">Contenu de vos Séquences d'Emails de Bienvenue (collez ici vos emails, un par ligne ou par paragraphe) :</label>
+                <textarea id="email-series-content" rows="10" placeholder="Exemple:
+Email 1: Bienvenue chez [Votre Marque] ! Nous sommes ravis de vous compter parmi nous. Découvrez nos produits [lien].
+Email 2: Votre guide pour bien démarrer. Regardez cette vidéo [lien].
+Email 3: Un cadeau spécial pour vous ! Utilisez le code [CODE] sur votre première commande." required></textarea>
+
+                <label for="target-goal">Objectif principal de votre séquence :</label>
+                <select id="target-goal" required>
+                    <option value="engagement">Augmenter l'engagement (ouverture, clic)</option>
+                    <option value="conversion">Maximiser la conversion (achat, inscription)</option>
+                    <option value="education">Éduquer sur le produit/service</option>
+                    <option value="loyalty">Fidéliser à long terme</option>
+                </select>
+
+                <label for="audience-type">Type d'audience :</label>
+                <input type="text" id="audience-type" placeholder="Ex: Nouveaux abonnés, prospects B2B, clients e-commerce" required>
+
+                <button type="submit" id="tool-submit">Optimiser mes Séquences</button>
+            </form>
+
+            <h3>Vos Suggestions d'Optimisation :</h3>
+            <div id="tool-result" class="result-panel">
+                <!-- Les résultats de l'analyse s'afficheront ici -->
+                Votre analyse apparaîtra ici après avoir soumis le formulaire.
+            </div>
+        </section>
+
+        <section class="section">
+            <h2>Pourquoi l'Optimisation de Séquences de Bienvenue est Essentielle ?</h2>
+            <p>Les emails de bienvenue ont un taux d'ouverture et de clic bien supérieur à la moyenne. C'est votre chance de faire une première impression mémorable, de poser les bases d'une relation durable et de diriger vos nouveaux inscrits vers la valeur qu'ils attendent. Ne laissez pas cette opportunité s'échapper.</p>
+            <div style="text-align: center;">
+                <a href="#tool-form" class="cta-button" data-affiliate-slot="primary-cta">Commencez votre Optimisation Gratuite</a>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2>Ils nous font confiance pour leurs Séquences</h2>
+            <div class="testimonial-grid">
+                <div class="testimonial-card">
+                    <p>"Grâce à cet outil, nous avons augmenté notre taux de conversion de +15% sur nos nouveaux leads en un mois. Les suggestions sur la personnalisation ont été un game changer !"</p>
+                    <strong>— Sophie L., Responsable Marketing, Start-up Tech</strong>
+                </div>
+                <div class="testimonial-card">
+                    <p>"Simple d'utilisation et diablement efficace ! Nos emails sont maintenant plus engageants et nos clients se sentent vraiment compris dès le départ."</p>
+                    <strong>— Marc D., Dir. Commercial, E-commerce Mode</strong>
+                </div>
+                <div class="testimonial-card">
+                    <p>"L'analyse des CTA a révélé des points faibles que nous n'avions jamais envisagés. Un incontournable pour toute équipe marketing soucieuse de ses performances."</p>
+                    <strong>— Clara V., Chef de Projet Digital, Agence Conseil</strong>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <div class="seo-section">
+        <div class="container">
+            <h2>Questions Fréquentes sur l'Optimisation d'Emails de Bienvenue</h2>
+            <p>Vous cherchez à améliorer votre stratégie d'email marketing en France ? L'optimisation de vos séquences de bienvenue est une étape clé. Notre outil vous aide à analyser et perfectionner ces messages cruciaux. Que vous soyez une PME ou une grande entreprise, comprendre les nuances de l'engagement client dès le premier contact est essentiel pour la fidélisation et la croissance.</p>
+            <p>Découvrez comment maximiser le taux d'ouverture de vos emails, affiner la personnalisation pour votre audience française, et intégrer des appels à l'action (CTA) percutants. Notre plateforme vous fournit des recommandations concrètes basées sur les meilleures pratiques pour vos séquences automatisées.</p>
+            <ul>
+                <li>Optimisation email bienvenue</li>
+                <li>Améliorer séquence onboarding client</li>
+                <li>Taux d'ouverture email France</li>
+                <li>Exemples emails de bienvenue efficaces</li>
+                <li>Personnalisation email marketing</li>
+                <li>Augmenter engagement nouveaux inscrits</li>
+                <li>Stratégie email de bienvenue B2B</li>
+                <li>Analyse performance séquence email</li>
+                <li>CTA efficaces email marketing</li>
+                <li>Fidélisation client email marketing</li>
+            </ul>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2023 Votre Outil d'Optimisation. Tous droits réservés.</p>
+    </footer>
+
+    <script>
+        document.getElementById('tool-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            const content = document.getElementById('email-series-content').value;
+            const goal = document.getElementById('target-goal').value;
+            const audience = document.getElementById('audience-type').value;
+            const resultDiv = document.getElementById('tool-result');
+
+            if (!content || !goal || !audience) {
+                resultDiv.textContent = "Veuillez remplir tous les champs du formulaire pour obtenir une analyse complète.";
+                return;
+            }
+
+            // Simple text analysis for demonstration purposes
+            let suggestions = [];
+            let contentLower = content.toLowerCase();
+
+            // Engagement metrics analysis (keywords)
+            let openRateKeywords = ["ouvrir", "découvrir", "exclusif", "urgent", "secret", "manquer"];
+            let clickRateKeywords = ["cliquez ici", "en savoir plus", "voir", "télécharger", "commencer", "visiter", "lien"];
+            let engagementScore = 0;
+
+            openRateKeywords.forEach(kw => { if (contentLower.includes(kw)) engagementScore++; });
+            clickRateKeywords.forEach(kw => { if (contentLower.includes(kw)) engagementScore++; });
+
+            if (engagementScore < 3) {
+                suggestions.push("- **Améliorez les objets et pré-en-têtes :** Utilisez des mots incitatifs pour l'ouverture (curiosité, urgence, exclusivité).");
+                suggestions.push("- **Rendez les CTA plus visibles :** Utilisez des boutons clairs et contrastés, avec un texte d'action fort.");
+            } else if (engagementScore < 6) {
+                suggestions.push("- **Affinez vos CTA :** Assurez-vous que chaque email a un CTA principal clair et unique.");
+            }
+
+            // Personalization
+            if (!contentLower.includes("[prénom]") && !contentLower.includes("[nom]")) {
+                suggestions.push("- **Intégrez la personnalisation :** Utilisez des champs dynamiques comme le prénom du destinataire pour créer une connexion.");
+            } else {
+                suggestions.push("- **Continuez la personnalisation :** Bravo ! Pensez à personnaliser le contenu en fonction des segments d'audience.");
+            }
+
+            // Call-to-actions (CTA)
+            let ctaCount = (contentLower.match(/\[lien\]|cliquez ici|en savoir plus|découvrir|commander|acheter|s'inscrire/g) || []).length;
+            if (ctaCount === 0) {
+                suggestions.push("- **Ajoutez des CTA clairs :** Chaque email doit guider l'utilisateur vers une action spécifique. Sans CTA, pas de conversion !");
+            } else if (ctaCount > 5) {
+                 suggestions.push("- **Simplifiez vos CTA :** Trop de CTA peut diluer l'attention. Concentrez-vous sur un objectif principal par email.");
+            } else {
+                suggestions.push("- **Évaluez la pertinence des CTA :** Assurez-vous que chaque CTA est en phase avec le contenu de l'email et l'étape de la séquence.");
+            }
+
+            // Educational components
+            let educationalKeywords = ["guide", "tuto", "comment", "astuce", "découvrir", "bénéfice", "avantage", "histoire"];
+            let educationalScore = 0;
+            educationalKeywords.forEach(kw => { if (contentLower.includes(kw)) educationalScore++; });
+
+            if (educationalScore < 2) {
+                suggestions.push("- **Introduisez du contenu éducatif :** Expliquez la valeur de votre offre, donnez des astuces ou des guides pour aider le nouvel inscrit.");
+            }
+
+            // General structure and flow
+            let emailCount = (content.match(/Email \d+:/g) || []).length;
+            if (emailCount < 3) {
+                suggestions.push("- **Développez la séquence :** Une séquence de bienvenue efficace comprend souvent 3 à 5 emails pour construire la relation progressivement.");
+            } else if (emailCount > 6) {
+                suggestions.push("- **Évaluez la longueur de la séquence :** Une séquence trop longue peut lasser. Chaque email doit avoir un objectif clair.");
+            }
+
+            // Tone based on goal and audience
+            if (goal === "conversion" && contentLower.includes("découvrir")) {
+                suggestions.push("- **Renforcez l'urgence ou la rareté :** Pour la conversion, utilisez des offres à durée limitée ou des incitations à l'action immédiate.");
+            } else if (goal === "engagement" && !contentLower.includes("poser question")) {
+                suggestions.push("- **Encouragez l'interaction :** Invitez les destinataires à répondre, à poser des questions ou à visiter vos réseaux sociaux.");
+            }
+            if (audience.toLowerCase().includes("b2b") && !contentLower.includes("solution") && !contentLower.includes("cas client")) {
+                suggestions.push("- **Adaptez au B2B :** Mettez en avant les solutions business, les études de cas, et la valeur ajoutée professionnelle.");
+            } else if (audience.toLowerCase().includes("e-commerce") && !contentLower.includes("promotion") && !contentLower.includes("nouveautés")) {
+                suggestions.push("- **Adaptez à l'e-commerce :** Mettez en avant les promotions, les nouveautés, et facilitez l'accès aux produits.");
+            }
+
+
+            if (suggestions.length === 0) {
+                resultDiv.innerHTML = "Votre séquence semble bien construite ! Voici quelques points à surveiller pour une excellence continue :<br>" +
+                                      "<ul>" +
+                                      "<li>Analysez régulièrement les performances (taux d'ouverture, clics, conversions).</li>" +
+                                      "<li>Testez différentes lignes d d'objet et CTA (A/B testing).</li>" +
+                                      "<li>Demandez des retours à vos clients.</li>" +
+                                      "<li>Mettez à jour le contenu pour rester pertinent.</li>" +
+                                      "</ul>";
+            } else {
+                resultDiv.innerHTML = "Voici nos suggestions pour optimiser votre séquence de bienvenue en fonction de vos objectifs et de votre audience :<br><ul><li>" + suggestions.join("</li><li>") + "</li></ul>";
+            }
+
+             // Headline variants generation
+            let headlines = {
+                seo: [
+                    "Optimisation Email Bienvenue : Guide Complet pour l'Engagement",
+                    "Améliorer Séquences Emails de Bienvenue : Boostez vos Conversions",
+                    "Audit Séquence Email de Bienvenue : Maximisez la Fidélisation Client"
+                ],
+                clickbait: [
+                    "Le Secret pour des Emails de Bienvenue qui Cartonnent : Révélé !",
+                    "Stop aux Emails de Bienvenue Inefficaces : La Solution Ultime Ici !",
+                    "Votre Séquence de Bienvenue est-elle un Désastre ? Découvrez-le !"
+                ],
+                expert: [
+                    "Maîtrisez l'Onboarding Client : Stratégies Avancées pour vos Séquences d'Emails",
+                    "Analyse Sémantique et Comportementale : Optimisation de vos Séquences d'Emails",
+                    "Leviers d'Activation : Ingénierie de Séquences d'Emails pour le Succès Client"
+                ],
+                soft: [
+                    "Créez des Emails de Bienvenue qui Résonnent avec vos Nouveaux Abonnés",
+                    "Accueillez vos Nouveaux Clients avec Chaleur et Efficacité",
+                    "Transformez le Premier Contact en une Relation Durable : Nos Astuces"
+                ],
+                commercial: [
+                    "Gagnez Plus de Clients avec nos Séquences d'Emails de Bienvenue Optimisées",
+                    "Augmentez vos Ventes de 20% grâce à nos Recommandations Personnalisées",
+                    "Votre Investissement dans l'Email Marketing Rentabilisé : Essayez notre Outil"
+                ]
+            };
+
+            let generatedHeadlines = "<h3>Exemples de Titres d'Emails Optimisés :</h3>";
+            for (const style in headlines) {
+                generatedHeadlines += `<p><strong>Style ${style.charAt(0).toUpperCase() + style.slice(1)}:</strong></p><ul>`;
+                headlines[style].forEach(h => {
+                    generatedHeadlines += `<li>${h}</li>`;
+                });
+                generatedHeadlines += "</ul>";
+            }
+            resultDiv.innerHTML += generatedHeadlines;
+
+
+        });
+    </script>
+<div id="qa-smoke-result" hidden></div>
+<script id="farmbuilder-affiliate-helper">
+(function () {
+  window.__UTILITY_AFFILIATE_MAP = window.__UTILITY_AFFILIATE_MAP || {};
+  document.addEventListener("click", function (event) {
+    const target = event.target.closest("[data-affiliate-slot]");
+    if (!target) return;
+    const slot = target.getAttribute("data-affiliate-slot");
+    const href = window.__UTILITY_AFFILIATE_MAP[slot];
+    if (!href) return;
+    if (target.tagName && target.tagName.toLowerCase() === "a") {
+      target.setAttribute("href", href);
+      target.removeAttribute("rel");
+      return;
+    }
+    event.preventDefault();
+    window.open(href, "_blank");
+  }, true);
+})();
+</script>
+<script id="farmbuilder-functional-qa">
+(function () {
+  function marker() {
+    let node = document.getElementById("qa-smoke-result");
+    if (node) return node;
+    node = document.createElement("div");
+    node.id = "qa-smoke-result";
+    node.hidden = true;
+    document.body.appendChild(node);
+    return node;
+  }
+
+  let qaFinished = false;
+  let qaWatchdog = null;
+
+  function normalize(text) {
+    return String(text || "").replace(/\s+/g, " ").trim();
+  }
+
+  function findForm() {
+    return document.getElementById("tool-form") || document.querySelector("form");
+  }
+
+  function findResult() {
+    return (
+      document.getElementById("tool-result") ||
+      document.querySelector("[data-result]") ||
+      document.querySelector(".tool-result, .result-card, .result, .results, .output, .preview, .diagnostic, .analysis")
+    );
+  }
+
+  function primaryAction(form) {
+    if (!form) return null;
+    return (
+      document.getElementById("tool-submit") ||
+      form.querySelector("#tool-submit") ||
+      form.querySelector("[data-primary-action]") ||
+      form.querySelector("button[type=submit]") ||
+      form.querySelector("button") ||
+      form.querySelector("input[type=submit]")
+    );
+  }
+
+  function resultSignature(node) {
+    if (!node) return "";
+    const text = normalize(node.textContent);
+    const html = normalize(node.innerHTML).slice(0, 600);
+    return `${text}||${html}`;
+  }
+
+  function resultHeadline(node) {
+    if (!node) return "";
+    const heading = node.querySelector("h1, h2, h3, strong, b");
+    return normalize(heading ? heading.textContent : "");
+  }
+
+  function sampleText(field) {
+    const key = `${field.id || ""} ${field.name || ""} ${field.placeholder || ""}`.toLowerCase();
+    if (/email/.test(key)) return "bonjour@example.com";
+    if (/url|site|website|lien/.test(key)) return "https://example.com/offre-solaire";
+    if (/phone|tel|mobile/.test(key)) return "0612345678";
+    if (/ville|city|localisation|location|region|departement|postal/.test(key)) return "Paris";
+    if (/orientation/.test(key)) return "sud";
+    if (/keyword|theme|topic|sujet|subject/.test(key)) return "energie solaire domestique";
+    if (/titre|title/.test(key)) return "Simulateur solaire maison";
+    if (/nom|name|project/.test(key)) return "Projet Horizon";
+    if (/description|notes|content|message/.test(key)) return "Maison individuelle exposee sud avec toiture exploitable.";
+    return field.placeholder || "France";
+  }
+
+  function sampleNumber(field) {
+    const key = `${field.id || ""} ${field.name || ""}`.toLowerCase();
+    if (/inclinaison|angle|slope/.test(key)) return "30";
+    if (/surface|size|m2|sqm/.test(key)) return "28";
+    if (/annee|year/.test(key)) return "2024";
+    if (/prix|price|budget|cost|amount|montant/.test(key)) return "12000";
+    const min = Number(field.min || "");
+    const max = Number(field.max || "");
+    if (Number.isFinite(min) && Number.isFinite(max) && max >= min) {
+      return String(Math.min(max, Math.max(min, min + Math.round((max - min) * 0.35))));
+    }
+    if (Number.isFinite(min)) return String(Math.max(min, 12));
+    if (Number.isFinite(max)) return String(Math.min(max, 12));
+    return field.value || "12";
+  }
+
+  function applySample(field) {
+    const tag = (field.tagName || "").toLowerCase();
+    const type = (field.type || "").toLowerCase();
+    if (field.disabled) return;
+    if (type === "hidden" || type === "submit" || type === "button" || type === "reset" || type === "image" || type === "file") {
+      return;
+    }
+    const currentValue = normalize(field.value);
+    if (tag === "select") {
+      if (currentValue) return;
+      const option = Array.from(field.options || []).find((item) => item.value && !item.disabled) || field.options[0];
+      if (option) field.value = option.value;
+      return;
+    }
+    if (type === "checkbox") {
+      if (field.checked) return;
+      field.checked = true;
+      return;
+    }
+    if (type === "radio") {
+      if (field.checked) return;
+      field.checked = true;
+      return;
+    }
+    if (type === "date") {
+      if (currentValue) return;
+      field.value = "2026-03-01";
+      return;
+    }
+    if (type === "email") {
+      if (currentValue) return;
+      field.value = "bonjour@example.com";
+      return;
+    }
+    if (type === "url") {
+      if (currentValue) return;
+      field.value = "https://example.com/offre-solaire";
+      return;
+    }
+    if (type === "tel") {
+      if (currentValue) return;
+      field.value = "0612345678";
+      return;
+    }
+    if (type === "color") {
+      if (currentValue) return;
+      field.value = "#2f855a";
+      return;
+    }
+    if (type === "number" || type === "range") {
+      if (currentValue) return;
+      field.value = sampleNumber(field);
+      return;
+    }
+    if (currentValue) return;
+    field.value = sampleText(field);
+  }
+
+  function stamp(status, detail, headline, primary) {
+    if (qaFinished) return;
+    qaFinished = true;
+    if (qaWatchdog) {
+      window.clearTimeout(qaWatchdog);
+      qaWatchdog = null;
+    }
+    const node = marker();
+    node.dataset.status = status;
+    node.dataset.mode = "native-form";
+    node.dataset.detail = detail || "";
+    node.dataset.headline = headline || "";
+    node.dataset.primary = primary || "";
+    node.dataset.viewport = window.innerWidth <= 640 ? "mobile" : "desktop";
+    window.setTimeout(function () {
+      try {
+        window.stop();
+      } catch (_error) {}
+    }, 0);
+  }
+
+  function installModalGuards() {
+    const noop = function () {};
+    const approve = function () { return true; };
+    const empty = function () { return ""; };
+    try { window.alert = noop; } catch (_error) {}
+    try { window.confirm = approve; } catch (_error) {}
+    try { window.prompt = empty; } catch (_error) {}
+  }
+
+  function triggerAction(form, action) {
+    try {
+      if (typeof form.requestSubmit === "function") {
+        form.requestSubmit(action || undefined);
+        return;
+      }
+    } catch (_error) {}
+    if (action && typeof action.click === "function") {
+      action.click();
+      return;
+    }
+    form.dispatchEvent(new Event("submit", { bubbles: true, cancelable: true }));
+  }
+
+  function inspectResult(before, attemptsLeft) {
+    const result = findResult();
+    if (!result) {
+      stamp("fail", "La zone de resultat est introuvable.", "");
+      return;
+    }
+    const after = resultSignature(result);
+    const text = normalize(result.textContent);
+    if (after && after !== before && text.length >= 24) {
+      const primary = result.querySelector("a[href], button[data-href], [data-primary-url]") || document.querySelector("#tool-result a[href]");
+      stamp("pass", "Le formulaire natif a mis a jour la zone de resultat.", resultHeadline(result), primary ? (primary.getAttribute("href") || primary.getAttribute("data-primary-url") || "") : "");
+      return;
+    }
+    if (attemptsLeft > 0) {
+      window.setTimeout(function () {
+        inspectResult(before, attemptsLeft - 1);
+      }, 250);
+      return;
+    }
+    stamp("fail", "La zone de resultat n'a pas renvoye de contenu exploitable.", resultHeadline(result));
+  }
+
+  function runSmoke() {
+    const params = new URLSearchParams(window.location.search);
+    if (params.get("__qa") !== "functional") return;
+    qaWatchdog = window.setTimeout(function () {
+      stamp("fail", "QA smoke timed out before the page reported a usable result.", "");
+    }, 7000);
+    const form = findForm();
+    if (!form) {
+      stamp("fail", "Le formulaire principal est introuvable.", "");
+      return;
+    }
+    const result = findResult();
+    const before = resultSignature(result);
+    installModalGuards();
+    try {
+      form.querySelectorAll("input, select, textarea").forEach(applySample);
+    } catch (error) {
+      stamp("fail", error && error.message ? `QA smoke sample failed: ${error.message}` : "QA smoke sample failed before submit.", "");
+      return;
+    }
+    const action = primaryAction(form);
+    try {
+      triggerAction(form, action);
+    } catch (error) {
+      stamp("fail", error && error.message ? `QA smoke submit failed: ${error.message}` : "QA smoke submit failed.", "");
+      return;
+    }
+    inspectResult(before, 10);
+  }
+
+  window.addEventListener("error", function (event) {
+    const message = event && event.message ? event.message : "JavaScript runtime error during QA smoke.";
+    stamp("fail", `QA smoke JS error: ${message}`, "");
+  }, { once: true });
+
+  window.addEventListener("unhandledrejection", function (event) {
+    const reason = event && event.reason;
+    const detail = typeof reason === "string"
+      ? reason
+      : reason && reason.message
+        ? reason.message
+        : "Unhandled promise rejection during QA smoke.";
+    stamp("fail", `QA smoke rejection: ${detail}`, "");
+  }, { once: true });
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", function () {
+      window.setTimeout(runSmoke, 60);
+    }, { once: true });
+  } else {
+    window.setTimeout(runSmoke, 60);
+  }
+})();
+</script>
+</body>
+</html>
